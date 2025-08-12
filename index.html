@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta Dotaciones Informáticas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #34495e;
+        }
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .checkbox-group {
+            margin: 10px 0;
+        }
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            cursor: pointer;
+        }
+        .checkbox-group input {
+            margin-right: 10px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #responseMessage {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .loading {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Encuesta de Dotaciones Informáticas</h1>
+        <form id="itEquipmentForm">
+            <!-- Información del empleado -->
+            <div class="form-group">
+                <label for="nombre">Nombre completo:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="departamento">Departamento:</label>
+                <select id="departamento" name="departamento" required>
+                    <option value="">Seleccione...</option>
+                    <option value="it">TI</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="ventas">Ventas</option>
+                    <option value="rrhh">Recursos Humanos</option>
+                    <option value="finanzas">Finanzas</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <!-- Equipamiento informático -->
+            <div class="form-group">
+                <label>Equipo asignado:</label>
+                
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="equipo" value="laptop"> Laptop
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="equipo" value="desktop"> Computadora de escritorio
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="equipo" value="monitor"> Monitor adicional
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="equipo" value="tablet"> Tablet
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Periféricos -->
+            <div class="form-group">
+                <label>Periféricos adicionales:</label>
+                
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="perifericos" value="teclado"> Teclado externo
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="perifericos" value="mouse"> Mouse externo
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="perifericos" value="dock"> Estación de acoplamiento (Dock)
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="perifericos" value="audifonos"> Audífonos
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Software -->
+            <div class="form-group">
+                <label for="software">Software especial requerido:</label>
+                <textarea id="software" name="software" rows="3" placeholder="Liste cualquier software especial que utilice en su trabajo..."></textarea>
+            </div>
+            
+            <!-- Comentarios adicionales -->
+            <div class="form-group">
+                <label for="comentarios">Comentarios adicionales:</label>
+                <textarea id="comentarios" name="comentarios" rows="3" placeholder="¿Alguna necesidad específica o problema con su equipo actual?"></textarea>
+            </div>
+            
+            <button type="submit">Enviar encuesta</button>
+        </form>
+        
+        <div id="responseMessage"></div>
+    </div>
+
+    <script>
+        // ==================================================
+        // FUNCIONES PRINCIPALES CORREGIDAS
+        // ==================================================
+        
+        // 1. Evento para manejar el envío del formulario
+        document.getElementById('itEquipmentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // 2. Recopilar datos del formulario
+            const formData = collectFormData();
+            
+            // 3. Validar datos
+            if (validateForm(formData)) {
+                // 4. Enviar datos a Google Apps Script
+                sendDataToGoogle(formData);
+            }
+        });
+        
+        /**
+         * Recopila los datos del formulario
+         */
+        function collectFormData() {
+            const form = document.getElementById('itEquipmentForm');
+            
+            const data = {
+                nombre: form.nombre.value,
+                departamento: form.departamento.value,
+                email: form.email.value,
+                software: form.software.value,
+                comentarios: form.comentarios.value,
+                equipo: [],
+                perifericos: []
+            };
+            
+            // Obtener checkboxes seleccionados para equipo
+            document.querySelectorAll('input[name="equipo"]:checked').forEach(checkbox => {
+                data.equipo.push(checkbox.value);
+            });
+            
+            // Obtener checkboxes seleccionados para periféricos
+            document.querySelectorAll('input[name="perifericos"]:checked').forEach(checkbox => {
+                data.perifericos.push(checkbox.value);
+            });
+            
+            return data;
+        }
+        
+        /**
+         * Validación básica del formulario
+         */
+        function validateForm(formData) {
+            if (!formData.nombre || !formData.email || !formData.departamento) {
+                showMessage('Por favor complete todos los campos requeridos', 'error');
+                return false;
+            }
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(formData.email)) {
+                showMessage('Por favor ingrese un correo electrónico válido', 'error');
+                return false;
+            }
+            
+            return true;
+        }
+        
+        /**
+         * Envía los datos a Google Apps Script - CORRECCIÓN IMPORTANTE
+         */
+        function sendDataToGoogle(data) {
+  // 1. Usar URL alternativa para evitar bloqueos
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyAvi4NCTsQr8ajknRNejbvxrCT5_DjePXYlCTZgr0nexey_nn1vMFXsg5faSJRBg9m/exec';
+  
+  showMessage('Enviando datos...', 'loading');
+  
+  // 2. Crear parámetro único para evitar caché
+  const timestamp = new Date().getTime();
+  const urlWithCacheBuster = `${SCRIPT_URL}?cache=${timestamp}`;
+  
+  // 3. Configuración de fetch optimizada
+  fetch(urlWithCacheBuster, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
+    mode: 'no-cors' // Modo crucial para evitar problemas CORS
+  })
+  .then(response => {
+    // 4. Manejo especial para modo no-cors
+    if (response.type === 'opaque') {
+      // Si usamos 'no-cors', no podemos leer la respuesta pero asumimos éxito
+      showMessage('¡Encuesta enviada con éxito!', 'success');
+      resetForm();
+      return;
+    }
+    return response.json();
+  })
+  .then(result => {
+    if (result && result.status === "success") {
+      showMessage('¡Encuesta enviada con éxito!', 'success');
+      resetForm();
+    } else {
+      throw new Error(result?.message || 'Error desconocido');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    
+    // 5. Intento alternativo con FormData
+    const formData = new FormData();
+    formData.append('data', JSON.stringify(data));
+    
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: formData
+    })
+    .then(() => {
+      showMessage('¡Datos enviados! (método alternativo)', 'success');
+      resetForm();
+    })
+    .catch(finalError => {
+      console.error('Error final:', finalError);
+      showMessage('Error al enviar: ' + finalError.message, 'error');
+    });
+  });
+}
+
+        /**
+         * Muestra mensajes al usuario
+         */
+        function showMessage(text, type) {
+            const messageDiv = document.getElementById('responseMessage');
+            messageDiv.textContent = text;
+            messageDiv.className = type;
+            messageDiv.style.display = 'block';
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            }
+        }
+        
+        /**
+         * Reinicia el formulario
+         */
+        function resetForm() {
+            document.getElementById('itEquipmentForm').reset();
+        }
+    </script>
+
+    
+</body>
+</html>
