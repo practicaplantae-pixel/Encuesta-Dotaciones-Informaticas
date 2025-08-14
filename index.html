@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta Dotaciones Informáticas - Plantae Labs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f9f0 0%, #e8f5e9 100%);
+            color: #2c3e50;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: #2e7d32;
+            color: white;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .logo img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+        
+        .header-text {
+            text-align: center;
+        }
+        
+        .header-text h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .header-text p {
+            font-style: italic;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .form-section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            color: #2e7d32;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #81c784;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            font-size: 1.4rem;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #34495e;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #4caf50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+            outline: none;
+        }
+        
+        .checkbox-group {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+        
+        .checkbox-group input {
+            margin-right: 10px;
+            width: auto;
+        }
+        
+        .item-form {
+            display: none;
+            margin-top: 15px;
+            margin-left: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .item-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .form-group-item {
+            margin-bottom: 15px;
+        }
+        
+        .form-group-item label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .form-group-item input,
+        .form-group-item select {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+        }
+        
+        button {
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            transition: all 0.3s;
+            font-weight: 600;
+            margin: 20px 0 10px;
+            box-shadow: 0 4px 8px rgba(46, 125, 50, 0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(46, 125, 50, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .help-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .help-button {
+            flex: 1;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #81c784;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .help-button:hover {
+            background: #c8e6c9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .help-button i {
+            margin-right: 8px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 25px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 700px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #2e7d32;
+        }
+        
+        .modal-title {
+            color: #2e7d32;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .modal-content ol {
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-content li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .modal-content h4 {
+            color: #2e7d32;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #2e7d32;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .footer a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .help-buttons {
+                flex-direction: column;
+            }
+            
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 2% auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100" height="100">
+                        <circle cx="12" cy="12" r="10" fill="#4CAF50"/>
+                        <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16z" fill="#E8F5E9"/>
+                        <path d="M12 6a6 6 0 100 12 6 6 0 000-12zm0 10a4 4 0 110-8 4 4 0 010 8z" fill="#4CAF50"/>
+                        <path d="M12 8a4 4 0 100 8 4 4 0 000-8z" fill="#E8F5E9"/>
+                    </svg>
+                </div>
+                <div class="header-text">
+                    <h1>Encuesta de Dotaciones Informáticas</h1>
+                    <p>IN NATURE WE BELIEVE</p>
+                    <p>PLANTAE LABS</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="help-buttons">
+            <div class="help-button" id="computador-help">
+                <i class="fas fa-laptop"></i> Datos del Computador
+            </div>
+            <div class="help-button" id="tablet-help">
+                <i class="fas fa-tablet-alt"></i> Datos de la Tablet
+            </div>
+        </div>
+
+        <div class="form-container">
+            <form id="itEquipmentForm">
+                <!-- Información personal -->
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-user"></i> Información Personal</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombres">Nombres:</label>
+                            <input type="text" id="nombres" name="nombres" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="apellido1">Primer Apellido:</label>
+                            <input type="text" id="apellido1" name="apellido1" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="apellido2">Segundo Apellido:</label>
+                            <input type="text" id="apellido2" name="apellido2">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="rut">RUT (sin puntos, con guión):</label>
+                            <input type="text" id="rut" name="rut" required pattern="\d{7,8}-[\dkK]"
+                                placeholder="Ej: 12345678-9">
+                            <small>Formato: 8 dígitos + guión + dígito verificador</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="departamento">Departamento:</label>
+                            <select id="departamento" name="departamento" required>
+                                <option value="">Seleccione...</option>
+                                <option value="Administracion y Finanzas">Administracion y Finanzas</option>
+                                <option value="Investigacion y Desarollo">Investigacion y Desarollo</option>
+                                <option value="Unidad de Estrategia Comercial">Unidad de Estrategia Comercial</option>
+                                <option value="Direccion General">Direccion General</option>
+                                <option value="Operaciones">Operaciones</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Correo electrónico:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Equipo asignado -->
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-laptop"></i> Equipo Asignado</h2>
+                    
+                    <!-- Laptop -->
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="equipo" value="laptop"> Laptop
+                        </label>
+                    </div>
+                    <div id="formulario-laptop" class="item-form">
+                        <h4>Características del Laptop</h4>
+                        <div class="item-grid">
+                            <div class="form-group-item">
+                                <label for="marca-laptop">Marca:</label>
+                                <input type="text" id="marca-laptop" name="marca-laptop">
+                            </div>
+                            <div class="form-group-item">
+                                <label for="modelo-laptop">Modelo:</label>
+                                <input type="text" id="modelo-laptop" name="modelo-laptop">
+                            </div>
+                            <div class="form-group-item">
+                                <label for="cpu-laptop">Procesador (CPU):</label>
+                                <input type="text" id="cpu-laptop" name="cpu-laptop">
+                            </div>
+                            <div class="form-group-item">
+                                <label for="tipo-almacenamiento-laptop">Tipo de almacenamiento:</label>
+                                <select id="tipo-almacenamiento-laptop" name="tipo-almacenamiento-laptop">
+                                    <option value="">Seleccione...</option>
+                                    <option value="SSD">SSD</option>
+                                    <option value="HDD">HDD</option>
+                                </select>
+                            </div>
+                            <div class="form-group-item">
+                                <label for="capacidad-almacenamiento-laptop">Capacidad de almacenamiento (GB):</label>
+                                <input type="number" id="capacidad-almacenamiento-laptop" name="capacidad-almacenamiento-laptop" min="128" max="2048">
+                            </div>
+                            <div class="form-group-item">
+                                <label for="ram-laptop">Memoria RAM (GB):</label>
+                                <input type="number" id="ram-laptop" name="ram-laptop" min="4" max="128" step="4">
+                            </div>
+                            <div class="form-group-item">
+                                <label for="so-laptop">Sistema Operativo:</label>
+                                <select id="so-laptop" name="so-laptop">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Windows">Windows</option>
+                                    <option value="MacOS">MacOS</option>
+                                    <option value="Linux">Linux</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Desktop -->
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="equipo" value="desktop"> Computadora de escritorio
+                        </label>
+                    </div>
+                    <div id="formulario-desktop" class="item-form">
+                        <h4>Características del Computador de Escritorio</h4>
+                        <div class="item-grid">
+                            <div class="form-group-item">
+                                <label for="marca-desktop">Marca:</label>
+                                <input type="text" id="marca-desktop" name="marca-desktop">
+                            </div>
+                            <div class="form-group-item">
+                                <label for="modelo-desktop">Modelo:</label>
+                                <input type="text" id="modelo-desktop" name="modelo-desktop">
+                            </div>
+                            <div class="form-group-item">
+                                <label for="cpu-desktop">Procesador (CPU):</label>
+                                <input type="text" id="cpu-desktop" name="cpu-desktop">
+                            </div>
+                            <div class="form-group-item">
+                                <label for="tipo-almacenamiento-desktop">Tipo de almacenamiento:</label>
+                                <select id="tipo-almacenamiento-desktop" name="tipo-almacenamiento-desktop">
+                                    <option value="">Seleccione...</option>
+                                    <option value="SSD">SSD</option>
+                                    <option value="HDD">HDD</option>
+                                </select>
+                            </div>
+                            <div class="form-group-item">
+                                <label for="capacidad-almacenamiento-desktop">Capacidad de almacenamiento (GB):</label>
+                                <input type="number" id="capacidad-almacenamiento-desktop" name="capacidad-almacenamiento-desktop" min="128" max="2048">
+                            </div>
+                            <div class="form-group-item">
+                                <label for="ram-desktop">Memoria RAM (GB):</label>
+                                <input type="number" id="ram-desktop" name="ram-desktop" min="4" max="128" step="4">
+                            </div>
+                            <div class="form-group-item">
+                                <label for="so-desktop">Sistema Operativo:</label>
+                                <select id="so-desktop" name="so-desktop">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Windows">Windows</option>
+                                    <option value="MacOS">MacOS</option>
+                                    <option value="Linux">Linux</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tablet -->
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="equipo" value="tablet"> Tablet
+                        </label>
+                    </div>
+                    <div id="formulario-tablet" class="item-form">
+                        <h4>Características de la Tablet</h4>
+                        <div class="item-grid">
+                            <div class="form-group-item">
+                                <label for="marca-tablet">Marca:</label>
+                                <input type="text" id="marca-tablet" name="marca-tablet">
+                            </div>
+                            <div class="form-group-item">
+                                <label for="modelo-tablet">Modelo:</label>
+                                <input type="text" id="modelo-tablet" name="modelo-tablet">
+                            </div>
+                            <div class="form-group-item">
+                                <label for="version-sistema-tablet">Versión del sistema:</label>
+                                <input type="text" id="version-sistema-tablet" name="version-sistema-tablet">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Monitor adicional -->
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="equipo" value="monitor"> Monitor adicional
+                        </label>
+                    </div>
+                    <div id="formulario-monitor" class="item-form">
+                        <h4>Características del Monitor</h4>
+                        <div class="item-grid">
+                            <div class="form-group-item">
+                                <label for="marca-monitor">Marca:</label>
+                                <input type="text" id="marca-monitor" name="marca-monitor">
+                            </div>
+                            <div class="form-group-item">
+                                <label for="modelo-monitor">Modelo:</label>
+                                <input type="text" id="modelo-monitor" name="modelo-monitor">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Artículos adicionales -->
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-microchip"></i> Artículos Adicionales</h2>
+                    
+                    <div class="item-grid">
+                        <!-- UPS o regulador de voltaje -->
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="articulos" value="ups"> UPS o regulador de voltaje
+                            </label>
+                        </div>
+                        <div id="formulario-ups" class="item-form">
+                            <h4>Características del UPS</h4>
+                            <div class="form-group-item">
+                                <label for="detalles-ups">Marca y Modelo:</label>
+                                <input type="text" id="detalles-ups" name="detalles-ups">
+                            </div>
+                        </div>
+                        
+                        <!-- Cargador oficial del notebook -->
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="articulos" value="cargador"> Cargador oficial del notebook
+                            </label>
+                        </div>
+                        <div id="formulario-cargador" class="item-form">
+                            <h4>Características del Cargador</h4>
+                            <div class="form-group-item">
+                                <label for="detalles-cargador">Marca y Modelo:</label>
+                                <input type="text" id="detalles-cargador" name="detalles-cargador">
+                            </div>
+                        </div>
+                        
+                        <!-- Regleta con protección -->
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="articulos" value="regleta"> Regleta con protección
+                            </label>
+                        </div>
+                        
+                        <!-- Cable de red Ethernet -->
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="articulos" value="cable_ethernet"> Cable de red Ethernet
+                            </label>
+                        </div>
+                        
+                        <!-- Adaptadores necesarios -->
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="articulos" value="adaptadores"> Adaptadores necesarios
+                            </label>
+                        </div>
+                        <div id="formulario-adaptadores" class="item-form">
+                            <h4>Características de los Adaptadores</h4>
+                            <div class="form-group-item">
+                                <label for="detalles-adaptadores">Marca y Modelo:</label>
+                                <input type="text" id="detalles-adaptadores" name="detalles-adaptadores">
+                            </div>
+                        </div>
+                        
+                        <!-- Audífonos con micrófono -->
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="articulos" value="audifonos_microfono"> Audífonos con micrófono
+                            </label>
+                        </div>
+                        <div id="formulario-audifonos_microfono" class="item-form">
+                            <h4>Características de los Audífonos</h4>
+                            <div class="form-group-item">
+                                <label for="detalles-audifonos_microfono">Marca y Modelo:</label>
+                                <input type="text" id="detalles-audifonos_microfono" name="detalles-audifonos_microfono">
+                            </div>
+                        </div>
+                        
+                        <!-- Cámara web externa -->
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="articulos" value="camara_web"> Cámara web externa
+                            </label>
+                        </div>
+                        <div id="formulario-camara_web" class="item-form">
+                            <h4>Características de la Cámara Web</h4>
+                            <div class="form-group-item">
+                                <label for="detalles-camara_web">Marca y Modelo:</label>
+                                <input type="text" id="detalles-camara_web" name="detalles-camara_web">
+                            </div>
+                        </div>
+                        
+                        <!-- Impresora/escáner -->
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="articulos" value="impresora"> Impresora/escáner
+                            </label>
+                        </div>
+                        <div id="formulario-impresora" class="item-form">
+                            <h4>Características de la Impresora/Escáner</h4>
+                            <div class="form-group-item">
+                                <label for="detalles-impresora">Marca y Modelo:</label>
+                                <input type="text" id="detalles-impresora" name="detalles-impresora">
+                            </div>
+                        </div>
+                        
+                        <!-- Silla ergonómica -->
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="articulos" value="silla"> Silla ergonómica
+                            </label>
+                        </div>
+                        
+                        <!-- Reposamuñecas -->
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="articulos" value="reposamunecas"> Reposamuñecas
+                            </label>
+                        </div>
+                        
+                        <!-- Paño de microfibra -->
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="articulos" value="pano_microfibra"> Paño de microfibra
+                            </label>
+                        </div>
+                        
+                        <!-- Limpiador de aire comprimido -->
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="articulos" value="limpiador_aire"> Limpiador de aire comprimido
+                            </label>
+                        </div>
+                        
+                        <!-- Antivirus/licencia de seguridad -->
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="articulos" value="antivirus"> Antivirus/licencia de seguridad
+                            </label>
+                        </div>
+                        <div id="formulario-antivirus" class="item-form">
+                            <h4>Detalles del Antivirus</h4>
+                            <div class="form-group-item">
+                                <label for="detalles-antivirus">Marca y Modelo/Licencia:</label>
+                                <input type="text" id="detalles-antivirus" name="detalles-antivirus">
+                            </div>
+                        </div>
+                        
+                        <!-- Software de respaldo -->
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="articulos" value="software_respaldo"> Software de respaldo
+                            </label>
+                        </div>
+                        <div id="formulario-software_respaldo" class="item-form">
+                            <h4>Detalles del Software</h4>
+                            <div class="form-group-item">
+                                <label for="detalles-software_respaldo">Marca y Modelo:</label>
+                                <input type="text" id="detalles-software_respaldo" name="detalles-software_respaldo">
+                            </div>
+                        </div>
+                        
+                        <!-- USB o disco externo -->
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="articulos" value="disco_externo"> USB o disco externo
+                            </label>
+                        </div>
+                        <div id="formulario-disco_externo" class="item-form">
+                            <h4>Características del Disco Externo</h4>
+                            <div class="form-group-item">
+                                <label for="detalles-disco_externo">Marca y Modelo:</label>
+                                <input type="text" id="detalles-disco_externo" name="detalles-disco_externo">
+                            </div>
+                        </div>
+                        
+                        <!-- Organizadores de cables -->
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="articulos" value="organizadores_cables"> Organizadores de cables
+                            </label>
+                        </div>
+                        
+                        <!-- Hub USB -->
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="articulos" value="hub_usb"> Hub USB
+                            </label>
+                        </div>
+                        <div id="formulario-hub_usb" class="item-form">
+                            <h4>Características del Hub USB</h4>
+                            <div class="form-group-item">
+                                <label for="detalles-hub_usb">Marca y Modelo:</label>
+                                <input type="text" id="detalles-hub_usb" name="detalles-hub_usb">
+                            </div>
+                        </div>
+                        
+                        <!-- Alfombrilla para mouse -->
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="articulos" value="alfombrilla_mouse"> Alfombrilla para mouse
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Software y comentarios -->
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="software">Software especial requerido:</label>
+                        <textarea id="software" name="software" rows="3" placeholder="Liste cualquier software especial que utilice en su trabajo..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="comentarios">Comentarios adicionales:</label>
+                        <textarea id="comentarios" name="comentarios" rows="3" placeholder="¿Alguna necesidad específica o problema con su equipo actual?"></textarea>
+                    </div>
+                </div>
+                
+                <button type="submit">Enviar Encuesta</button>
+            </form>
+        </div>
+        
+        <div class="footer">
+            <p>© 2025 Plantae Labs - Greening Matil Bajo, Bio-Bio, Chile</p>
+            <p><a href="https://www.plantaelabs.com" target="_blank">www.plantaelabs.com</a></p>
+        </div>
+    </div>
+
+    <!-- Modales de ayuda -->
+    <div id="modal-computador" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 class="modal-title">¿Cómo obtener datos del Computador?</h3>
+            <p>Siga estos pasos para encontrar la información técnica de su computador:</p>
+            <ol>
+                <li><strong>Windows:</strong>
+                    <ul>
+                        <li>Presione <kbd>Win</kbd> + <kbd>R</kbd>, escriba "msinfo32" y presione Enter</li>
+                        <li>Verá información detallada sobre su sistema</li>
+                        <li>Busque: Fabricante (Marca), Modelo, Procesador, Memoria instalada (RAM)</li>
+                    </ul>
+                </li>
+                <li><strong>MacOS:</strong>
+                    <ul>
+                        <li>Haga clic en el menú Apple > "Acerca de este Mac"</li>
+                        <li>Verá información sobre el modelo, procesador y memoria</li>
+                        <li>Para almacenamiento: Abra "Almacenamiento" en la misma ventana</li>
+                    </ul>
+                </li>
+                <li><strong>Linux:</strong>
+                    <ul>
+                        <li>Abra la terminal y escriba: <code>lshw -short</code></li>
+                        <li>Busque la información del sistema, procesador y memoria</li>
+                        <li>Para almacenamiento: <code>lsblk</code> o <code>df -h</code></li>
+                    </ul>
+                </li>
+            </ol>
+            <h4>Información adicional:</h4>
+            <p>Para el tipo de almacenamiento (SSD/HDD):</p>
+            <ul>
+                <li>Windows: Administrador de dispositivos > Unidades de disco</li>
+                <li>MacOS: Acerca de este Mac > Almacenamiento</li>
+                <li>Linux: Terminal > <code>lsblk -d -o name,rota</code> (1 = HDD, 0 = SSD)</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div id="modal-tablet" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 class="modal-title">¿Cómo obtener datos de la Tablet?</h3>
+            <p>Siga estos pasos para encontrar la información técnica de su tablet:</p>
+            <ol>
+                <li><strong>Android:</strong>
+                    <ul>
+                        <li>Vaya a Ajustes > Acerca del dispositivo</li>
+                        <li>Busque "Modelo y hardware" para marca y modelo</li>
+                        <li>En "Versión de Android" encontrará el sistema operativo</li>
+                        <li>Para almacenamiento: Ajustes > Almacenamiento</li>
+                    </ul>
+                </li>
+                <li><strong>iPad:</strong>
+                    <ul>
+                        <li>Vaya a Ajustes > General > Información</li>
+                        <li>Verá el nombre del modelo y número de modelo</li>
+                        <li>La versión de iOS está en "Versión de software"</li>
+                        <li>Para almacenamiento: Ajustes > General > Almacenamiento de iPhone/iPad</li>
+                    </ul>
+                </li>
+                <li><strong>Windows Tablet:</strong>
+                    <ul>
+                        <li>Vaya a Configuración > Sistema > Acerca de</li>
+                        <li>Busque la información del dispositivo</li>
+                    </ul>
+                </li>
+            </ol>
+            <h4>Información adicional:</h4>
+            <p>Para obtener más detalles técnicos:</p>
+            <ul>
+                <li>Android: Descargue aplicaciones como CPU-Z o Device Info</li>
+                <li>iPad: La información detallada está en la parte posterior del dispositivo</li>
+                <li>Windows: Use la aplicación "Información del sistema"</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Configuración inicial al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ocultar todos los formularios de artículos al inicio
+            document.querySelectorAll('.item-form').forEach(form => {
+                form.style.display = 'none';
+            });
+            
+            // Configurar eventos para mostrar/ocultar formularios de artículos
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const formId = `formulario-${this.value}`;
+                    const form = document.getElementById(formId);
+                    if (form) {
+                        form.style.display = this.checked ? 'block' : 'none';
+                    }
+                });
+            });
+            
+            // Configurar botones de ayuda
+            document.getElementById('computador-help').addEventListener('click', function() {
+                document.getElementById('modal-computador').style.display = 'block';
+            });
+            
+            document.getElementById('tablet-help').addEventListener('click', function() {
+                document.getElementById('modal-tablet').style.display = 'block';
+            });
+            
+            // Configurar botones de cierre de modales
+            document.querySelectorAll('.close').forEach(closeBtn => {
+                closeBtn.addEventListener('click', function() {
+                    this.closest('.modal').style.display = 'none';
+                });
+            });
+            
+            // Cerrar modal al hacer clic fuera del contenido
+            window.addEventListener('click', function(event) {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    if (event.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Evento para enviar formulario
+            document.getElementById('itEquipmentForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = collectFormData();
+                if (validateForm(formData)) sendDataToGoogle(formData);
+            });
+        });
+
+        // Validación de RUT chileno
+        function validarRUT(rut) {
+            if (!rut || !/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(rut)) return false;
+            
+            const tmp = rut.split('-');
+            let digv = tmp[1];
+            const rutNum = tmp[0];
+            
+            if (digv === 'K') digv = 'k';
+            
+            return calcularDV(rutNum) == digv;
+        }
+
+        function calcularDV(rut) {
+            let suma = 0;
+            let mul = 2;
+            
+            for (let i = rut.length - 1; i >= 0; i--) {
+                suma = suma + rut.charAt(i) * mul;
+                if (mul === 7) mul = 2;
+                else mul++;
+            }
+            
+            const res = suma % 11;
+            if (res === 1) return 'k';
+            if (res === 0) return '0';
+            return (11 - res).toString();
+        }
+
+        // Recolectar datos del formulario
+        function collectFormData() {
+            const form = document.getElementById('itEquipmentForm');
+            const data = {
+                nombres: form.nombres.value,
+                apellido1: form.apellido1.value,
+                apellido2: form.apellido2.value,
+                rut: form.rut.value,
+                departamento: form.departamento.value,
+                email: form.email.value,
+                software: form.software.value,
+                comentarios: form.comentarios.value,
+                equipo: [],
+                articulos: [],
+                detalles: {}
+            };
+            
+            // Obtener equipos seleccionados
+            document.querySelectorAll('input[name="equipo"]:checked').forEach(checkbox => {
+                data.equipo.push(checkbox.value);
+                
+                // Guardar detalles para laptop, desktop y tablet
+                if (['laptop', 'desktop', 'tablet'].includes(checkbox.value)) {
+                    const prefix = checkbox.value;
+                    const details = {};
+                    
+                    // Recoger todos los campos para este equipo
+                    const fields = document.querySelectorAll(`#formulario-${prefix} input, #formulario-${prefix} select`);
+                    fields.forEach(field => {
+                        details[field.name] = field.value;
+                    });
+                    
+                    data.detalles[prefix] = details;
+                } else {
+                    // Para otros equipos, guardar marca y modelo combinados
+                    const marca = document.getElementById(`marca-${checkbox.value}`)?.value || '';
+                    const modelo = document.getElementById(`modelo-${checkbox.value}`)?.value || '';
+                    if (marca || modelo) {
+                        data.detalles[checkbox.value] = `${marca} ${modelo}`;
+                    }
+                }
+            });
+            
+            // Obtener artículos seleccionados
+            document.querySelectorAll('input[name="articulos"]:checked').forEach(checkbox => {
+                data.articulos.push(checkbox.value);
+                
+                // Guardar detalles para artículos que tienen formulario
+                const detallesInput = document.getElementById(`detalles-${checkbox.value}`);
+                if (detallesInput) {
+                    data.detalles[checkbox.value] = detallesInput.value;
+                }
+            });
+            
+            return data;
+        }
+
+        // Validar formulario
+        function validateForm(formData) {
+            // Validar campos obligatorios
+            if (!formData.nombres || !formData.apellido1 || !formData.rut || !formData.departamento || !formData.email) {
+                alert('Por favor complete todos los campos requeridos');
+                return false;
+            }
+            
+            // Validar formato de RUT
+            if (!validarRUT(formData.rut)) {
+                alert('Por favor ingrese un RUT válido (sin puntos, con guión)');
+                return false;
+            }
+            
+            // Validar email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(formData.email)) {
+                alert('Por favor ingrese un correo electrónico válido');
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Enviar datos a Google Apps Script
+        function sendDataToGoogle(data) {
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyKYzPCMtOwd-qGsrZXLc3Db3gXvfsUW6fcCTfvGCaccYrJHP65suxo4TrQyi4jcpi4xQ/exec';
+            
+            // Mostrar mensaje de envío
+            alert('Enviando datos...');
+            
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Error en la respuesta del servidor');
+                return response.json();
+            })
+            .then(result => {
+                if (result && result.success) {
+                    alert('¡Encuesta enviada con éxito!');
+                    document.getElementById('itEquipmentForm').reset();
+                    // Ocultar todos los formularios después de enviar
+                    document.querySelectorAll('.item-form').forEach(form => {
+                        form.style.display = 'none';
+                    });
+                } else {
+                    throw new Error(result?.message || 'Error desconocido');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert(`Error al enviar: ${error.message}`);
+            });
+        }
+    </script>
+</body>
+</html>
